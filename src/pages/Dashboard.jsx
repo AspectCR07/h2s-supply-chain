@@ -15,7 +15,7 @@ const Dashboard = () => {
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
-           setChartData(data.forecast);
+          setChartData(data.forecast);
         }
       })
       .catch(err => console.error("Forecast API Error:", err));
@@ -84,20 +84,21 @@ const Dashboard = () => {
           </div>
           <div style={{ height: '300px', width: '100%' }}>
             {chartData.length === 0 ? (
-               <div className="flex justify-center items-center h-full text-muted"><RefreshCcw className="animate-spin mr-2"/> Rendering AI Network Forecast...</div>
+              <div className="flex justify-center items-center h-full text-muted"><RefreshCcw className="animate-spin mr-2" /> Rendering AI Network Forecast...</div>
             ) : (
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" vertical={false} />
-                <XAxis dataKey="name" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}
-                  itemStyle={{ color: 'var(--text-primary)' }}
-                />
-                <Line type="monotone" dataKey="risk" stroke="var(--color-critical)" strokeWidth={3} dot={{ r: 4, fill: 'var(--color-critical)' }} activeDot={{ r: 6, fill: 'var(--bg-main)', stroke: 'var(--color-critical)' }} />
-              </LineChart>
-            </ResponsiveContainer>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" vertical={false} />
+                  <XAxis dataKey="name" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                  <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}
+                    itemStyle={{ color: 'var(--text-primary)' }}
+                  />
+                  <Line type="monotone" dataKey="risk" stroke="var(--color-critical)" strokeWidth={3} dot={{ r: 4, fill: 'var(--color-critical)' }} activeDot={{ r: 6, fill: 'var(--bg-main)', stroke: 'var(--color-critical)' }} />
+                </LineChart>
+              </ResponsiveContainer>
+            )}
           </div>
         </div>
 
@@ -106,10 +107,10 @@ const Dashboard = () => {
           <div className="card-header">
             <h3 className="card-title"><CloudLightning size={20} color="var(--color-warning)" /> LIVE: NewsAPI Disruptions</h3>
           </div>
-          
+
           <div className="flex-col gap-3" style={{ flexGrow: 1, overflowY: 'auto' }}>
-            {loading && <div className="flex items-center gap-2 justify-center h-full text-muted"><RefreshCcw className="animate-spin" size={16}/> Polling FastAPI...</div>}
-            
+            {loading && <div className="flex items-center gap-2 justify-center h-full text-muted"><RefreshCcw className="animate-spin" size={16} /> Polling FastAPI...</div>}
+
             {!loading && alerts.map((alert, i) => (
               <div key={i} className="flex-col gap-2 p-3" style={{ border: `1px solid ${alert.severity === 'critical' ? 'var(--color-critical)' : 'var(--color-warning)'}`, borderRadius: 'var(--radius-md)', backgroundColor: alert.severity === 'critical' ? 'var(--color-critical-bg)' : 'var(--color-warning-bg)' }}>
                 <div className="flex justify-between items-center">
